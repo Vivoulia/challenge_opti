@@ -37,7 +37,28 @@ def lucas_heuristic(gestionnaire):
         print(conteneur_operation, conteneur_id)
         gestionnaire.printAll()
         if conteneur_operation == " A":
-            gestionnaire.addLastNonFullPile(conteneur_id)
+            #On essait pile vide
+            premiere_pile_vide = gestionnaire.findPremPilevide()
+            if(premiere_pile_vide != -1):
+                print("Pile vide")
+                gestionnaire.putConteneurIntoPile(premiere_pile_vide, conteneur_id)
+            else:
+                #Sommet min pile croissante
+                pile_sommet_min = gestionnaire.findMinSommetCroissant(conteneur_id)
+                if(pile_sommet_min != -1):
+                    print("Sommet croissant min")
+                    gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_id)
+                else:
+                    #Sommet min pile non croissante
+                    pile_sommet_min = gestionnaire.findMinSommetNonCroissant(conteneur_id)
+                    if(pile_sommet_min != -1):
+                        print("Sommet non croissant min")
+                        gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_id) 
+                    else:
+                        pile_id = 0
+                        while (gestionnaire.putConteneurIntoPile(pile_id, conteneur_id) == False):
+                            pile_id = pile_id+1
+                            
         else:
             while(gestionnaire.estAccessible(conteneur_id) == False):
                 #On prends le bloquant
@@ -76,15 +97,24 @@ def lucas_heuristic(gestionnaire):
             gestionnaire.enleverConteneur(conteneur_id)
 
 def main():
-    numero = 13
-    print("c'est le main")
-    gestionnaire = lecture.lecture_donnee(numero)
-    gestionnaire.initPile()
-    gestionnaire.printAll()
-    lucas_heuristic(gestionnaire)
-    print(gestionnaire.save_solution)
-    lecture.save_solution_file(numero, gestionnaire.save_solution)
-    gestionnaire.croiss_ncroiss()
+    numero = 6
+    for numero in range(7, 8):
+        print("#NUMERO", numero)
+        gestionnaire = lecture.lecture_donnee(numero)
+        gestionnaire.initPile()
+        gestionnaire.printAll()
+        lucas_heuristic(gestionnaire)
+        print(gestionnaire.save_solution)
+        lecture.save_solution_file(numero, gestionnaire.save_solution)
+
+    #numero = 6    
+    #print("#NUMERO", numero)
+    #gestionnaire = lecture.lecture_donnee(numero)
+    #gestionnaire.initPile()
+    #gestionnaire.printAll()
+    #lucas_heuristic(gestionnaire)
+    #print(gestionnaire.save_solution)
+    #lecture.save_solution_file(numero, gestionnaire.save_solution)    
 
 if __name__ == "__main__":
     main()   

@@ -123,24 +123,18 @@ class GestionnaireConteneur:
     
     def croiss_ncroiss(self):
         #Rempli le tableau d'info pile (1 croissant / 0 non croissant)
-        for i in range(self.L):
-            self.info_pile[i] = 1
-            
-        fin_parcours_colonne = False
-        for l in range(self.L):
-            base = self.N
-            for h in range(self.H):
-                if(fin_parcours_colonne == False):
-                    if (self.tab_pile[l][h] == -1):
-                        fin_parcours_colonne = True
-                        if ( h == 1):
-                            self.info_pile[l] = 0
-                    elif(self.tab_pile[l][h]>base): #pile non croissante
-                        self.info_pile[l] = 0 
-                        fin_parcours_colonne = True
-                    else:
-                        base = self.tab_pile[l][h]
-            fin_parcours_colonne = False  
+        for i_pile in range(self.L):
+            croissante = 1
+            for i_conteneur in range(1, self.H):
+                if (self.tab_pile[i_pile][i_conteneur] != -1):
+                    if not(self.tab_pile[i_pile][i_conteneur] < self.tab_pile[i_pile][i_conteneur-1]):
+                        croissante = 0
+                        break
+                else:
+                    if (i_conteneur == 1):
+                        croissante = 0
+                        break
+            self.info_pile[i_pile] = croissante
             
     def findPremPilevide(self):
         #renvoie 1er pile vide
@@ -153,11 +147,13 @@ class GestionnaireConteneur:
     def pireCas(self, conteneur_id):
         maximum = 0
         colonne_destination = -1
+        print(self.info_pile)
         for l in range(self.L):
             if (l != self.tab_conteneur[conteneur_id].x-1):
                 print(self.tab_conteneur[conteneur_id].x-1, l)
                 if(self.info_pile[l] == 0): #parcours des piles non croissantes
                     for h in range(self.H-1):
+                        print("maximum", maximum ," compare", self.tab_pile[l][h] )
                         if(self.tab_pile[l][h] > maximum and self.tab_pile[l][-1] == -1):
                             colonne_destination = l
                             maximum = self.tab_pile[l][h]
