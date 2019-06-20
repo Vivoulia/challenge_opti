@@ -1,5 +1,6 @@
 import conteneur
 import lecture
+import random
 
 
 def first_fit_heuristic(gestionnaire):
@@ -42,7 +43,6 @@ def lucas_heuristic(gestionnaire):
             if(pile_sommet_min != -1):
                 print("Sommet croissant min")
                 gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_id)            
-            
             else:
                 #On essait pile vide
                 premiere_pile_vide = gestionnaire.findPremPilevide()
@@ -57,9 +57,23 @@ def lucas_heuristic(gestionnaire):
                         print("Sommet non croissant min")
                         gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_id) 
                     else:
-                        pile_id = 0
-                        while (gestionnaire.putConteneurIntoPile(pile_id, conteneur_id) == False):
-                            pile_id = pile_id+1
+                        trouve = False
+                        for i in range(gestionnaire.L):
+                            hauteur_sommet = gestionnaire.getHauteurSommetPile(i)
+                            sommet = gestionnaire.getSommetPile(i)
+                            print("hauteur", hauteur_sommet, "sommet", sommet)
+                            for j in range(gestionnaire.H):
+                                if (gestionnaire.tab_pile[i][j] == conteneur_id+1 or gestionnaire.tab_pile[i][j] == conteneur_id-1):
+                                    distance = abs(hauteur_sommet - j)
+                                    pile_sommet_min = gestionnaire.findMinSommetCroissant(sommet)
+                                    if (pile_sommet_min != -1):
+                                        gestionnaire.putConteneurIntoPile(premiere_pile_vide, sommet)
+                                        trouve = True
+                                        gestionnaire.putConteneurIntoPile(i, conteneur_id)
+                        if (trouve == False):
+                            pile_id = 0
+                            while (gestionnaire.putConteneurIntoPile(pile_id, conteneur_id) == False):
+                                pile_id = pile_id + 1
                             
         else:
             while(gestionnaire.estAccessible(conteneur_id) == False):
@@ -106,22 +120,22 @@ def lucas_heuristic(gestionnaire):
 
 def main():
 
-    for numero in range(1, 21):
-        print("#NUMERO", numero)
-        gestionnaire = lecture.lecture_donnee(numero)
-        gestionnaire.initPile()
-        gestionnaire.printAll()
-        lucas_heuristic(gestionnaire)
-        print(gestionnaire.save_solution)
-        lecture.save_solution_file(numero, gestionnaire.save_solution)
-   
-    #print("#NUMERO", numero)
-    #gestionnaire = lecture.lecture_donnee(numero)
-    #gestionnaire.initPile()
-    #gestionnaire.printAll()
-    #lucas_heuristic(gestionnaire)
-    #print(gestionnaire.save_solution)
-    #lecture.save_solution_file(numero, gestionnaire.save_solution)    
+    #for numero in range(1, 21):
+        #print("#NUMERO", numero)
+        #gestionnaire = lecture.lecture_donnee(numero)
+        #gestionnaire.initPile()
+        #gestionnaire.printAll()
+        #lucas_heuristic(gestionnaire)
+        #print(gestionnaire.save_solution)
+        #lecture.save_solution_file(numero, gestionnaire.save_solution)
+    numero = 8
+    print("#NUMERO", numero)
+    gestionnaire = lecture.lecture_donnee(numero)
+    gestionnaire.initPile()
+    gestionnaire.printAll()
+    lucas_heuristic(gestionnaire)
+    print(gestionnaire.save_solution)
+    lecture.save_solution_file(numero, gestionnaire.save_solution)    
 
 if __name__ == "__main__":
     main()   

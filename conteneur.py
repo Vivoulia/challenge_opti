@@ -114,6 +114,18 @@ class GestionnaireConteneur:
                     return self.tab_pile[pile_id][0]
             
         return self.tab_pile[pile_id][-1]
+
+    def getHauteurSommetPile(self, pile_id):
+        #Renvoie l'id du sommet au dessus de la pile pile_id
+        for j in range(self.H):
+            if(self.tab_pile[pile_id][j] == -1):
+                #Sommet de la pile
+                if j > 0:
+                    return j-1
+                else:
+                    return 0
+            
+        return self.H
             
     def printAll(self):
         for h in range(self.H-1,-1,-1):
@@ -205,6 +217,8 @@ class GestionnaireConteneur:
     
     def putConteneurIntoPile(self, pile_id, conteneur_id):
          #Ajoute un conteneur dans une pile 
+        if(pile_id < 0 and pile_id > self.L):
+            return False
         for j in range(self.H):
             if(self.tab_pile[pile_id][j] == -1):
                 self.tab_pile[pile_id][j] = conteneur_id
@@ -215,6 +229,8 @@ class GestionnaireConteneur:
                 self.save_solution.append([self.tab_conteneur[conteneur_id].x, pile_id+1])
                 self.tab_conteneur[conteneur_id].x = pile_id+1
                 self.tab_conteneur[conteneur_id].y = j+1
+                print("On a  ", conteneur_id)
+                self.printTabConteneur()
                 return True #L'insertion a bien fonctionné
         return False #L'insertion est un echec
     
