@@ -25,11 +25,26 @@ class GestionnaireConteneur:
         
         for i in range(self.N):
             cont = self.tab_conteneur[i]
-            self.tab_pile[cont.x-1][cont.y-1] = cont.conteneur_id
+            if (x != 0 and y != 0):
+                #Si x et y sont différents de 0 on peut ajouter le conteneur a une pile
+                self.tab_pile[cont.x-1][cont.y-1] = cont.conteneur_id
+                self.tab_conteneur[conteneur_id].ajouter = True
+
         
-    def addConteneurPile(cont, id_pile):
-        #Ajoute un conteneur dans la pile d'id id_pile
-        pass
+    def addConteneurPile(cont, pile_id, conteneur_id):
+        for j in range(self.H):
+            if(self.tab_pile[pile_id][j] == -1):
+                #Sommet de la pile
+                if j != 0:
+                    #Le sommet est a l'indice j-1
+                    self.tab_pile[pile_id][j-1] = conteneur_id
+                    self.tab_conteneur[conteneur_id].ajouter = True
+                else:
+                    #On ajoute le conteneneur a l'indice 0
+                    self.tab_pile[pile_id][0] = conteneur_id
+                    self.tab_conteneur[conteneur_id].ajouter = True
+                
+                    
     
     def createConteneur(self, x, y, conteneur_id):
         conteneur = Conteneur(x, y, conteneur_id)
