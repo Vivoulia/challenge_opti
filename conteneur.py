@@ -63,6 +63,19 @@ class GestionnaireConteneur:
                         if self.tab_pile[i][j-1] == conteneur_id:
                             return True
         return False
+    
+    def findPileConteneur(self, conteneur_id):
+        for i in range(self.L):
+            for j in range(self.H):
+                if(self.tab_pile[i][j] == conteneur_id):
+                    return i
+            
+    def addLastNonFullPile(self, conteneur_id):
+        for i in range(self.L):
+            for j in range(self.H):
+                if (self.tab_pile[i][j] == -1):
+                    self.tab_pile[i][j] = conteneur_id
+                    self.tab_conteneur[conteneur_id].ajouter = True        
             
     def printTabConteneur(self):
         print("Affichage des conteneurs")
