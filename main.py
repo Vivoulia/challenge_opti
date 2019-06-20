@@ -16,10 +16,11 @@ import lecture
 def main():
 <<<<<<< Updated upstream
     print("c'est le main")
-    gestionnaire = conteneur.GestionnaireConteneur(4,3,5)
-    gestionnaire.addPile()
+    gestionnaire = conteneur.GestionnaireConteneur(2,10,10)
     gestionnaire.createConteneur(1,1,0)
-    gestionnaire.tab_pile[0].put(gestionnaire.tab_conteneur[0])
+    gestionnaire.createConteneur(1,2,1)
+    gestionnaire.initPile()
+    print(gestionnaire.tab_pile[0][0])
     print(gestionnaire.estAccessible(0))
 =======
     lecture.lecture_donnee(1)
