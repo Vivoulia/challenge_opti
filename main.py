@@ -14,18 +14,12 @@ import lecture
             #while():
 
 def main():
-<<<<<<< Updated upstream
     print("c'est le main")
-    gestionnaire = conteneur.GestionnaireConteneur(2,10,10)
-    gestionnaire.createConteneur(1,1,0)
-    gestionnaire.createConteneur(1,2,1)
+     
+
+    gestionnaire = lecture.lecture_donnee(1)
     gestionnaire.initPile()
-    print(gestionnaire.tab_pile[0][0])
-    print(gestionnaire.estAccessible(0))
-=======
-    lecture.lecture_donnee(1)
-    
->>>>>>> Stashed changes
+    gestionnaire.printAll()
     
 if __name__ == "__main__":
     main()   

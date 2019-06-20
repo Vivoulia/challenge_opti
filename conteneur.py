@@ -25,10 +25,10 @@ class GestionnaireConteneur:
         
         for i in range(self.N):
             cont = self.tab_conteneur[i]
-            if (x != 0 and y != 0):
+            if (cont.x != 0 and cont.y != 0):
                 #Si x et y sont différents de 0 on peut ajouter le conteneur a une pile
                 self.tab_pile[cont.x-1][cont.y-1] = cont.conteneur_id
-                self.tab_conteneur[conteneur_id].ajouter = True
+                self.tab_conteneur[cont.conteneur_id].ajouter = True
 
         
     def addConteneurPile(cont, pile_id, conteneur_id):
@@ -70,7 +70,13 @@ class GestionnaireConteneur:
             print("id:", cont.conteneur_id, "| x:", cont.x, "| y:",  cont.y)
             
     def printAll(self):
-        pass
+        for h in range(self.H-1,-1,-1):
+            for l in range(self.L):
+                print(self.tab_pile[l][h]+1, " ", end = '')
+            print('')
+        
+            
+        
         
             
     
