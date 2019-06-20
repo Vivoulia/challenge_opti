@@ -63,13 +63,17 @@ def lucas_heuristic(gestionnaire):
                             sommet = gestionnaire.getSommetPile(i)
                             print("hauteur", hauteur_sommet, "sommet", sommet)
                             for j in range(gestionnaire.H):
-                                if (gestionnaire.tab_pile[i][j] == conteneur_id+1 or gestionnaire.tab_pile[i][j] == conteneur_id-1):
-                                    distance = abs(hauteur_sommet - j)
+                                distance = abs(hauteur_sommet - j)
+                                if ((gestionnaire.tab_pile[i][j] == conteneur_id+1 or gestionnaire.tab_pile[i][j] == conteneur_id+1) and distance < 3  and trouve == False):
                                     pile_sommet_min = gestionnaire.findMinSommetCroissant(sommet)
-                                    if (pile_sommet_min != -1):
-                                        gestionnaire.putConteneurIntoPile(premiere_pile_vide, sommet)
+                                    if (pile_sommet_min != -1 and pile_sommet_min != i):
+                                        print("On envoie 1", sommet, "dans la colonne", pile_sommet_min)
+                                        gestionnaire.putConteneurIntoPile(pile_sommet_min, sommet)
+                                        gestionnaire.printAll()
                                         trouve = True
+                                        print("On envoie 2", conteneur_id, "dans la colonne", i)
                                         gestionnaire.putConteneurIntoPile(i, conteneur_id)
+                                        gestionnaire.printAll()
                         if (trouve == False):
                             pile_id = 0
                             while (gestionnaire.putConteneurIntoPile(pile_id, conteneur_id) == False):
@@ -120,22 +124,22 @@ def lucas_heuristic(gestionnaire):
 
 def main():
 
-    #for numero in range(1, 21):
-        #print("#NUMERO", numero)
-        #gestionnaire = lecture.lecture_donnee(numero)
-        #gestionnaire.initPile()
-        #gestionnaire.printAll()
-        #lucas_heuristic(gestionnaire)
-        #print(gestionnaire.save_solution)
-        #lecture.save_solution_file(numero, gestionnaire.save_solution)
-    numero = 8
-    print("#NUMERO", numero)
-    gestionnaire = lecture.lecture_donnee(numero)
-    gestionnaire.initPile()
-    gestionnaire.printAll()
-    lucas_heuristic(gestionnaire)
-    print(gestionnaire.save_solution)
-    lecture.save_solution_file(numero, gestionnaire.save_solution)    
+    for numero in range(1, 21):
+        print("#NUMERO", numero)
+        gestionnaire = lecture.lecture_donnee(numero)
+        gestionnaire.initPile()
+        gestionnaire.printAll()
+        lucas_heuristic(gestionnaire)
+        print(gestionnaire.save_solution)
+        lecture.save_solution_file(numero, gestionnaire.save_solution)
+    #numero = 8
+    #print("#NUMERO", numero)
+    #gestionnaire = lecture.lecture_donnee(numero)
+    #gestionnaire.initPile()
+    #gestionnaire.printAll()
+    #lucas_heuristic(gestionnaire)
+    #print(gestionnaire.save_solution)
+    #lecture.save_solution_file(numero, gestionnaire.save_solution)    
 
 if __name__ == "__main__":
     main()   
