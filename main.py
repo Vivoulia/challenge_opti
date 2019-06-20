@@ -34,8 +34,13 @@ def main():
     gestionnaire = lecture.lecture_donnee(20)
     gestionnaire.initPile()
     gestionnaire.printAll()
+<<<<<<< Updated upstream
     first_fit_heuristic(gestionnaire)
     print(gestionnaire.save_solution)
     lecture.save_solution_file(20, gestionnaire.save_solution)
+=======
+    gestionnaire.croiss_ncroiss()
+    
+>>>>>>> Stashed changes
 if __name__ == "__main__":
     main()   

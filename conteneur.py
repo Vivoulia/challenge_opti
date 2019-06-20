@@ -6,6 +6,7 @@ class Conteneur:
         self.conteneur_id = conteneur_id
         self.ajouter = False
         
+
 class GestionnaireConteneur:
     def __init__(self, N, L, H):
         self.N = N
@@ -14,8 +15,8 @@ class GestionnaireConteneur:
         self.tab_pile = []
         self.tab_conteneur = []
         self.tab_operation = []
-        self.pile_possible = L
         self.save_solution = []
+        self.info_pile = [] # 0 si non croissant et 1 si croissant (initialisé à 1)
     
     def initPile(self):
         for i in range(self.L):
@@ -23,6 +24,7 @@ class GestionnaireConteneur:
             for j in range(self.H):
                 Q.append(-1)
             self.tab_pile.append(Q)
+            self.info_pile.append(1) 
         
         for i in range(self.N):
             cont = self.tab_conteneur[i]
@@ -117,6 +119,31 @@ class GestionnaireConteneur:
             for l in range(self.L):
                 print(self.tab_pile[l][h], "    ", end = '')
             print('')
+    
+    def croiss_ncroiss(self):
+        fin_parcours_colonne = False
+        for l in range(self.L):
+            sommet = -1
+            for h in range(self.H-1,-1,-1):
+                if(fin_parcours_colonne == False):
+                    if(self.tab_pile[l][h]<sommet): #pile non croissante
+                        self.info_pile[l] = 0 
+                        fin_parcours_colonne = True
+                    else:
+                        sommet = self.tab_pile[l][h]
+            print(self.info_pile[l])
+            fin_parcours_colonne = False  
+            
+    def findPremPilevide(self):
+        for l in range(self.L):
+            if(self.tab_pile[l][0] == -1):
+                return l
+        return -1
+        
+        
+    
+        
+    
         
             
         
