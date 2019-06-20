@@ -161,12 +161,12 @@ class GestionnaireConteneur:
 
     def findMinSommetCroissant(self, conteneur_bloquant_id):
         #Renvoie les coordonnées de la case au dessus du minimum des sommets des piles croissantes (renvoie [-1, -1] en cas de non existence
-        mini = 0
+        mini = self.N
         pile_id = -1
         for i_pile in range(self.L):
             if(self.info_pile[i_pile] == 1):
                 conteneur_id = self.getSommetPile(i_pile)
-                if(conteneur_bloquant_id < conteneur_id and conteneur_id > mini):
+                if(conteneur_bloquant_id < conteneur_id and conteneur_id < mini):
                     #C'est un minimum
                     if(self.tab_conteneur[conteneur_id].y < self.H-1):
                         #Si le sommet de la pile est 
@@ -188,13 +188,13 @@ class GestionnaireConteneur:
     
     def findMinSommetNonCroissant(self, conteneur_bloquant_id):
         #Renvoie les coordonnées de la case au dessus du minimum des sommets des piles croissantes (renvoie [-1, -1] en cas de non existence
-        maxi = 0
+        maxi = self.N
         pile_id = -1
         for i_pile in range(self.L):
             if(self.info_pile[i_pile] == 0):
                 conteneur_id = self.getSommetPile(i_pile)
                 print("Sommet non croissant", conteneur_id)
-                if(conteneur_bloquant_id < conteneur_id and conteneur_id > maxi):
+                if(conteneur_bloquant_id < conteneur_id and conteneur_id < maxi):
                     #C'est un minimum
                     if(self.tab_conteneur[conteneur_id].y < self.H):
                         #Si le sommet de la pile est 

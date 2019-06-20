@@ -37,17 +37,19 @@ def lucas_heuristic(gestionnaire):
         print(conteneur_operation, conteneur_id)
         gestionnaire.printAll()
         if conteneur_operation == " A":
-            #On essait pile vide
-            premiere_pile_vide = gestionnaire.findPremPilevide()
-            if(premiere_pile_vide != -1):
-                print("Pile vide")
-                gestionnaire.putConteneurIntoPile(premiere_pile_vide, conteneur_id)
+            #Sommet min pile croissante
+            pile_sommet_min = gestionnaire.findMinSommetCroissant(conteneur_id)
+            if(pile_sommet_min != -1):
+                print("Sommet croissant min")
+                gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_id)            
+            
             else:
-                #Sommet min pile croissante
-                pile_sommet_min = gestionnaire.findMinSommetCroissant(conteneur_id)
-                if(pile_sommet_min != -1):
-                    print("Sommet croissant min")
-                    gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_id)
+                #On essait pile vide
+                premiere_pile_vide = gestionnaire.findPremPilevide()
+                if(premiere_pile_vide != -1):
+                    print("Pile vide")
+                    gestionnaire.putConteneurIntoPile(premiere_pile_vide, conteneur_id)                
+                
                 else:
                     #Sommet min pile non croissante
                     pile_sommet_min = gestionnaire.findMinSommetNonCroissant(conteneur_id)
@@ -68,17 +70,19 @@ def lucas_heuristic(gestionnaire):
                             conteneur_bloquant = gestionnaire.getSommetPile(i)
                             print("Bloque", conteneur_id)
                             print("Bloquant", conteneur_bloquant)
-                            #On essait pile vide
-                            premiere_pile_vide = gestionnaire.findPremPilevide()
-                            if(premiere_pile_vide != -1):
-                                print("Pile vide")
-                                gestionnaire.putConteneurIntoPile(premiere_pile_vide, conteneur_bloquant)
+                            #Sommet min pile croissante
+                            pile_sommet_min = gestionnaire.findMinSommetCroissant(conteneur_bloquant)
+                            if(pile_sommet_min != -1):
+                                print("Sommet croissant min")
+                                gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_bloquant)                            
+                            
                             else:
-                                #Sommet min pile croissante
-                                pile_sommet_min = gestionnaire.findMinSommetCroissant(conteneur_bloquant)
-                                if(pile_sommet_min != -1):
-                                    print("Sommet croissant min")
-                                    gestionnaire.putConteneurIntoPile(pile_sommet_min, conteneur_bloquant)
+                                #On essait pile vide
+                                premiere_pile_vide = gestionnaire.findPremPilevide()
+                                if(premiere_pile_vide != -1):
+                                    print("Pile vide")
+                                    gestionnaire.putConteneurIntoPile(premiere_pile_vide, conteneur_bloquant)                                
+                                
                                 else:
                                     #Sommet min pile non croissante
                                     pile_sommet_min = gestionnaire.findMinSommetNonCroissant(conteneur_bloquant)

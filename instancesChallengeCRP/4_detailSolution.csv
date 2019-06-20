@@ -53,28 +53,28 @@ Retrait du container 4 (pile 1)
     8    9    0    5    0
    10   11   15   12   14
 
-Relocalisation du container 7 (pile 4 vers pile 3)
+Relocalisation du container 7 (pile 4 vers pile 2)
     0    0    0    0    0
-    0    0    0    0    0
+    0    7    0    0    0
     6   13    0    0    0
-    8    9    7    5    0
+    8    9    0    5    0
    10   11   15   12   14
 
 Retrait du container 5 (pile 4)
     0    0    0    0    0
-    0    0    0    0    0
+    0    7    0    0    0
     6   13    0    0    0
-    8    9    7    0    0
+    8    9    0    0    0
    10   11   15   12   14
 
 Retrait du container 6 (pile 1)
     0    0    0    0    0
-    0    0    0    0    0
+    0    7    0    0    0
     0   13    0    0    0
-    8    9    7    0    0
+    8    9    0    0    0
    10   11   15   12   14
 
-Retrait du container 7 (pile 3)
+Retrait du container 7 (pile 2)
     0    0    0    0    0
     0    0    0    0    0
     0   13    0    0    0
@@ -88,42 +88,42 @@ Retrait du container 8 (pile 1)
     0    9    0    0    0
    10   11   15   12   14
 
-Relocalisation du container 13 (pile 2 vers pile 3)
+Relocalisation du container 13 (pile 2 vers pile 5)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0    9   13    0    0
+    0    9    0    0   13
    10   11   15   12   14
 
 Retrait du container 9 (pile 2)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0    0   13    0    0
+    0    0    0    0   13
    10   11   15   12   14
 
 Retrait du container 10 (pile 1)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0    0   13    0    0
+    0    0    0    0   13
     0   11   15   12   14
 
 Retrait du container 11 (pile 2)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0    0   13    0    0
+    0    0    0    0   13
     0    0   15   12   14
 
 Retrait du container 12 (pile 4)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0    0   13    0    0
+    0    0    0    0   13
     0    0   15    0   14
 
-Retrait du container 13 (pile 3)
+Retrait du container 13 (pile 5)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
