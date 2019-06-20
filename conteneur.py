@@ -139,6 +139,26 @@ class GestionnaireConteneur:
             if(self.tab_pile[l][0] == -1):
                 return l
         return -1
+    
+    def pireCas(self):
+        minimum = 0
+        colonne_destination = -1
+        for l in range(self.L):
+            if(info_pile[l] == 0): #parcours des piles non croissantes
+                for h in range(self.H-1):
+                    if(self.tab_pile[l][h] < minimum):
+                        colonne_destination = l
+                conteneur_id = getSommetPile(l)
+                if(self.tab_conteneur[conteneur_id].y < H):
+                    return colonne_destination
+        return -1
+        
+                        
+                
+                
+                
+                
+    
         
         
     
