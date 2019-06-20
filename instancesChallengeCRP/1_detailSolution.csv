@@ -95,56 +95,56 @@ Relocalisation du container 15 (pile 1 vers pile 4)
    13    0    0    0   10
     8   14   12   15   11
 
-Relocalisation du container 9 (pile 1 vers pile 4)
+Relocalisation du container 9 (pile 1 vers pile 5)
     0    0    0    0    0
     0    0    0    0    0
-    0    0    0    0    0
-   13    0    0    9   10
+    0    0    0    0    9
+   13    0    0    0   10
     8   14   12   15   11
 
-Relocalisation du container 13 (pile 1 vers pile 2)
+Relocalisation du container 13 (pile 1 vers pile 4)
     0    0    0    0    0
     0    0    0    0    0
-    0    0    0    0    0
-    0   13    0    9   10
+    0    0    0    0    9
+    0    0    0   13   10
     8   14   12   15   11
 
 Retrait du container 8 (pile 1)
     0    0    0    0    0
     0    0    0    0    0
-    0    0    0    0    0
-    0   13    0    9   10
+    0    0    0    0    9
+    0    0    0   13   10
     0   14   12   15   11
 
-Retrait du container 9 (pile 4)
+Retrait du container 9 (pile 5)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0   13    0    0   10
+    0    0    0   13   10
     0   14   12   15   11
 
 Retrait du container 10 (pile 5)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0   13    0    0    0
+    0    0    0   13    0
     0   14   12   15   11
 
 Retrait du container 11 (pile 5)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0   13    0    0    0
+    0    0    0   13    0
     0   14   12   15    0
 
 Retrait du container 12 (pile 3)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0
-    0   13    0    0    0
+    0    0    0   13    0
     0   14    0   15    0
 
-Retrait du container 13 (pile 2)
+Retrait du container 13 (pile 4)
     0    0    0    0    0
     0    0    0    0    0
     0    0    0    0    0

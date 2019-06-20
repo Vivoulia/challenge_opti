@@ -173,7 +173,18 @@ class GestionnaireConteneur:
                         mini = conteneur_id
                         #On renvoie la case libre
                         pile_id = self.tab_conteneur[conteneur_id].x-1
-        return pile_id   
+        return pile_id
+    
+    def findMax(self, conteneur_id):
+        maximum = 0
+        pile_id = -1
+        for l in range(self.L):
+            if(self.tab_conteneur[conteneur_id].x-1 != l and self.tab_pile[l][-1] == -1):
+                sommet_id = self.getSommetPile(pile_id)
+                if sommet_id > maximum:
+                    maximum = sommet_id
+                    pile_id = l
+        return pile_id
     
     def findMinSommetNonCroissant(self, conteneur_bloquant_id):
         #Renvoie les coordonnées de la case au dessus du minimum des sommets des piles croissantes (renvoie [-1, -1] en cas de non existence

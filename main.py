@@ -92,13 +92,17 @@ def lucas_heuristic(gestionnaire):
                                             print("Pire cas")
                                             gestionnaire.putConteneurIntoPile(pile_pire, conteneur_bloquant) 
                                         else:
-                                            print("Oulala grosse erreur")
+                                            pile_encore_pire = gestionnaire.findMax(conteneur_bloquant)
+                                            if (pile_encore_pire != -1):
+                                                gestionnaire.putConteneurIntoPile(pile_encore_pire, conteneur_bloquant)
+                                            else:
+                                                print("Oulalala erreur grave ya encore un cas non gere")
                             gestionnaire.printAll()
             gestionnaire.enleverConteneur(conteneur_id)
 
 def main():
-    numero = 6
-    for numero in range(7, 8):
+
+    for numero in range(1, 21):
         print("#NUMERO", numero)
         gestionnaire = lecture.lecture_donnee(numero)
         gestionnaire.initPile()
@@ -106,8 +110,7 @@ def main():
         lucas_heuristic(gestionnaire)
         print(gestionnaire.save_solution)
         lecture.save_solution_file(numero, gestionnaire.save_solution)
-
-    #numero = 6    
+   
     #print("#NUMERO", numero)
     #gestionnaire = lecture.lecture_donnee(numero)
     #gestionnaire.initPile()
