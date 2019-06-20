@@ -104,6 +104,7 @@ class GestionnaireConteneur:
         return False
             
     def getSommetPile(self, pile_id):
+        #Renvoie l'id du sommet au dessus de la pile pile_id
         for j in range(self.H):
             if(self.tab_pile[pile_id][j] == -1):
                 #Sommet de la pile
@@ -121,45 +122,97 @@ class GestionnaireConteneur:
             print('')
     
     def croiss_ncroiss(self):
+        #Rempli le tableau d'info pile (1 croissant / 0 non croissant)
+        for i in range(self.L):
+            self.info_pile[i] = 1
+            
         fin_parcours_colonne = False
         for l in range(self.L):
-            sommet = -1
-            for h in range(self.H-1,-1,-1):
+            base = self.N
+            for h in range(self.H):
                 if(fin_parcours_colonne == False):
-                    if(self.tab_pile[l][h]<sommet): #pile non croissante
+                    if (self.tab_pile[l][h] == -1):
+                        fin_parcours_colonne = True
+                        if ( h == 1):
+                            self.info_pile[l] = 0
+                    elif(self.tab_pile[l][h]>base): #pile non croissante
                         self.info_pile[l] = 0 
                         fin_parcours_colonne = True
                     else:
-                        sommet = self.tab_pile[l][h]
-            print(self.info_pile[l])
+                        base = self.tab_pile[l][h]
             fin_parcours_colonne = False  
             
     def findPremPilevide(self):
+        #renvoie 1er pile vide
         for l in range(self.L):
             if(self.tab_pile[l][0] == -1):
                 return l
         return -1
     
-    def pireCas(self):
-        minimum = 0
+
+    def pireCas(self, conteneur_id):
+        maximum = 0
         colonne_destination = -1
         for l in range(self.L):
-            if(info_pile[l] == 0): #parcours des piles non croissantes
-                for h in range(self.H-1):
-                    if(self.tab_pile[l][h] < minimum):
-                        colonne_destination = l
-                conteneur_id = getSommetPile(l)
-                if(self.tab_conteneur[conteneur_id].y < H):
-                    return colonne_destination
-        return -1
-        
-                        
-                
-                
-                
-                
+            if (l != self.tab_conteneur[conteneur_id].x-1):
+                print(self.tab_conteneur[conteneur_id].x-1, l)
+                if(self.info_pile[l] == 0): #parcours des piles non croissantes
+                    for h in range(self.H-1):
+                        if(self.tab_pile[l][h] > maximum and self.tab_pile[l][-1] == -1):
+                            colonne_destination = l
+                            maximum = self.tab_pile[l][h]
+        return colonne_destination
+
+    def findMinSommetCroissant(self, conteneur_bloquant_id):
+        #Renvoie les coordonnées de la case au dessus du minimum des sommets des piles croissantes (renvoie [-1, -1] en cas de non existence
+        mini = 0
+        pile_id = -1
+        for i_pile in range(self.L):
+            if(self.info_pile[i_pile] == 1):
+                conteneur_id = self.getSommetPile(i_pile)
+                if(conteneur_bloquant_id < conteneur_id and conteneur_id > mini):
+                    #C'est un minimum
+                    if(self.tab_conteneur[conteneur_id].y < self.H-1):
+                        #Si le sommet de la pile est 
+                        mini = conteneur_id
+                        #On renvoie la case libre
+                        pile_id = self.tab_conteneur[conteneur_id].x-1
+        return pile_id   
+    
+    def findMinSommetNonCroissant(self, conteneur_bloquant_id):
+        #Renvoie les coordonnées de la case au dessus du minimum des sommets des piles croissantes (renvoie [-1, -1] en cas de non existence
+        maxi = 0
+        pile_id = -1
+        for i_pile in range(self.L):
+            if(self.info_pile[i_pile] == 0):
+                conteneur_id = self.getSommetPile(i_pile)
+                print("Sommet non croissant", conteneur_id)
+                if(conteneur_bloquant_id < conteneur_id and conteneur_id > maxi):
+                    #C'est un minimum
+                    if(self.tab_conteneur[conteneur_id].y < self.H):
+                        #Si le sommet de la pile est 
+                        maxi = conteneur_id
+                        #On renvoie la case libre
+                        pile_id = self.tab_conteneur[conteneur_id].x-1
+        return pile_id  
+    
+    def putConteneurIntoPile(self, pile_id, conteneur_id):
+         #Ajoute un conteneur dans une pile 
+        for j in range(self.H):
+            if(self.tab_pile[pile_id][j] == -1):
+                self.tab_pile[pile_id][j] = conteneur_id
+                if (self.tab_conteneur[conteneur_id].x != 0 and self.tab_conteneur[conteneur_id].y != 0):
+                    #Si le conteneur était deja placé on met a jour son ancienne position
+                    self.tab_pile[self.tab_conteneur[conteneur_id].x-1][self.tab_conteneur[conteneur_id].y-1] = -1
+                #On met a jour la position du conteneur
+                self.save_solution.append([self.tab_conteneur[conteneur_id].x, pile_id+1])
+                self.tab_conteneur[conteneur_id].x = pile_id+1
+                self.tab_conteneur[conteneur_id].y = j+1
+                return True #L'insertion a bien fonctionné
+        return False #L'insertion est un echec
     
         
+                    
         
     
         
