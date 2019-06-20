@@ -43,13 +43,23 @@ def lecture_donnee(numero):
             if(ligne>0):
                 op = row[0][2:]
                 print(op)
-                gestionnaire.addOperation([op, row[1]])
+                gestionnaire.addOperation([int(op) - 1, row[1]])
                 conteneur_id = conteneur_id + 1
             ligne = ligne + 1
     csv_file.close()  
 
     return gestionnaire
             
+def save_solution_file(numero, tab_solution):
+    filename_save = os.path.join(dirname, 'solution')
+        
+    with open(filename + "\\" + str(numero) +"_solution.csv", mode='w', newline='') as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+        writer.writerow(["FROM ", " TO"])
+        for solution in tab_solution:
+            writer.writerow([str(solution[0])+" ", " " + str(solution[1])])
+        
+    csv_file.close()    
 
         
         

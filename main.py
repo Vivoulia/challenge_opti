@@ -3,31 +3,39 @@ import lecture
 
 
 def first_fit_heuristic(gestionnaire):
-    for operation in gestionaire.operation:
+    deplacement = 0
+    estDeplace = False
+    for operation in gestionnaire.tab_operation:
         conteneur_id = operation[0]
         conteneur_operation = operation[1]
-        if conteneur_operation == "A":
-            addLastNonFullPile(conteneur_id)
+        print(conteneur_operation)
+        if conteneur_operation == " A":
+            gestionnaire.addLastNonFullPile(conteneur_id)
         else:
-            while(estAccessible(conteneur_id) == False):
-                for i in range(self.L):
-                    for j in range(self.H):
-                        if(self.tab_pile[i][j] == conteneur_id):
-                            conteneur_bloquant = j-1
-                            addLastNonFullPile(conteneur_bloquant)
+            while(gestionnaire.estAccessible(conteneur_id) == False):
+                print("Bloque", conteneur_id)
+                for i in range(gestionnaire.L):
+                    for j in range(gestionnaire.H):
+                        if(gestionnaire.tab_pile[i][j] == conteneur_id):
+                            conteneur_bloquant = gestionnaire.getSommetPile(i)                           
+                            estDeplace = gestionnaire.addLastNonFullPile(conteneur_bloquant)
+                            if(estDeplace):
+                                print("Bloquant", conteneur_bloquant)
+                                gestionnaire.printAll()
+                                deplacement = deplacement + 1
+                                estDaplace = False
+            gestionnaire.enleverConteneur(conteneur_id)
+    print("deplacement ", deplacement)
+
             
 
 def main():
     print("c'est le main")
-<<<<<<< Updated upstream
-     
-
-    gestionnaire = lecture.lecture_donnee(1)
+    gestionnaire = lecture.lecture_donnee(20)
     gestionnaire.initPile()
     gestionnaire.printAll()
-=======
-
->>>>>>> Stashed changes
-    
+    first_fit_heuristic(gestionnaire)
+    print(gestionnaire.save_solution)
+    lecture.save_solution_file(20, gestionnaire.save_solution)
 if __name__ == "__main__":
     main()   
